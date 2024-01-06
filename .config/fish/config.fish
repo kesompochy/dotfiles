@@ -9,3 +9,5 @@ set -x PATH $PATH $GOPATH/bin
 
 set -x BUN_INSTALL $HOME/.bun
 set -x PATH $BUN_INSTALL/bin:$PATH
+
+set -x WIN_CHROME_PATH /mnt/c/'Program Files'/Google/Chrome/Application/chrome.exe
