@@ -1,0 +1,7 @@
+[ghq]
+        root = ~/src
+[user]
+        email = kesompochy@gmail.com
+        name = kesompochy
+[hub]
+        protocol = ssh
