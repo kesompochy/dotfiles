@@ -34,4 +34,6 @@ for dir in (ls $repo_config_dir)
   ln -s $repo_subdir $home_subdir
   echo "Linked $repo_subdir to $home_subdir!!"
 end
+ln -s (pwd)/.tmux.conf $HOME/.tmux.conf
+
 echo "===Finished linking config files!==="
