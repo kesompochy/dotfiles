@@ -7,7 +7,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " TypeScript用のシンタックスハイライトとLSPサポート
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
