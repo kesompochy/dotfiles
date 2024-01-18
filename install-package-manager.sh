@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [! -f ~/.local/share/nvim/site/autoload/plug.vim]; then
   echo "Installing vim-plug..."
