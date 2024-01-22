@@ -6,7 +6,7 @@ set autoindent
 call plug#begin('~/.local/share/nvim/plugged')
 
 nnoremap <C-S> :w<CR>
-inoremap <C-S> <Esc>:w<CR>a
+inoremap <C-S> <Esc>:w<CR>
 
 " ファイルエクスプローラ
 Plug 'kyazdani42/nvim-tree.lua'
@@ -15,6 +15,9 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 " TypeScript用のシンタックスハイライトとLSPサポート
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" git
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
