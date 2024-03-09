@@ -4,13 +4,18 @@ echo "===Start installing packages...==="
 echo "Install packages for "(uname)"!!"
 switch (uname)
   case Linux
-    # sudo apt-get install neovim # This is not the latest version
-    sudo apt-get install fzf
+    sudo apt update
+    # sudo apt install neovim # This is not the latest version
+    sudo apt install -y fzf
+    sudo apt install -y fish
 
   case Darwin
     brew install neovim
     brew install fzf
 end
+
+echo "Change default shell to fish!!"
+sudo chsh -s (which fish) $USER
 
 echo "Install common packages!!"
 go install github.com/x-motemen/ghq@latest
