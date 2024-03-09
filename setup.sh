@@ -8,6 +8,7 @@ switch (uname)
     # sudo apt install neovim # This is not the latest version
     sudo apt install -y fzf
     sudo apt install -y fish
+    sudo apt install -y golang-go
 
   case Darwin
     brew install neovim
