@@ -4,7 +4,7 @@ echo "===Start installing packages...==="
 echo "Install packages for "(uname)"!!"
 switch (uname)
   case Linux
-    sudo apt-get install neovim
+    # sudo apt-get install neovim # This is not the latest version
     sudo apt-get install fzf
 
   case Darwin
@@ -37,3 +37,10 @@ end
 ln -s (pwd)/.tmux.conf $HOME/.tmux.conf
 
 echo "===Finished linking config files!==="
+
+echo "===Start sourcing config files...==="
+echo "Sourcing fish config"
+source $home_config_dir/fish/config.fish
+echo "Sourcing tmux config"
+tmux source ~/.tmux.conf
+echo "===Finished sourcing config files!==="
