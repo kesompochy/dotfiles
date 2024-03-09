@@ -5,12 +5,16 @@ set autoindent
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+autocmd VimEnter * NvimTreeOpen
+autocmd VimLeavePre * NvimTreeClose
+
 nnoremap <C-S> :w<CR>
 inoremap <C-S> <Esc>:w<CR>
 
 " ファイルエクスプローラ
 Plug 'kyazdani42/nvim-tree.lua'
-nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap nn :NvimTreeToggle<CR>
+nnoremap nf :NvimTreeFindFile<CR>
 
 " TypeScript用のシンタックスハイライトとLSPサポート
 Plug 'leafgarland/typescript-vim'
