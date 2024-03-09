@@ -22,6 +22,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " git
 Plug 'tpope/vim-fugitive'
+nnoremap gg :G<CR>
+nnoremap gc :G commit<CR>
+nnoremap gd :G diff<CR>
 
 call plug#end()
 
