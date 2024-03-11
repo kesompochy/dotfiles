@@ -38,6 +38,8 @@ Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 nnoremap <C-p> :Telescope find_files hidden=true<CR>
 nnoremap <C-f> :Telescope live_grep<CR>
+nnoremap <C-b> :Telescope buffers<CR>
+nnoremap <C-g> :Telescope git_status<CR>
 
 call plug#end()
 
