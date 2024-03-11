@@ -29,9 +29,29 @@ nnoremap gg :G<CR>
 nnoremap gc :G commit<CR>
 nnoremap gd :G diff<CR>
 
+
+" telescope.nvim
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+Plug 'nvim-telescope/telescope-frecency.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+nnoremap <C-p> :Telescope find_files hidden=true<CR>
+nnoremap <C-f> :Telescope live_grep<CR>
+
 call plug#end()
 
 " coc.nvimの設定
 let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']
 
-lua require'plugins'
+lua << EOF
+require'plugins'
+require('telescope').setup{
+  defaults = {
+    file_ignore_patterns = {'.git/'},
+    vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--smart-case", "--column", "-uu"},
+    extensions = { fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" }   },
+  },
+}
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('frecency')
+EOF
