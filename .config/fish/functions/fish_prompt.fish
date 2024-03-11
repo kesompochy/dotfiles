@@ -43,7 +43,10 @@ function fish_prompt --description 'Write out the prompt'
         set color_cwd $fish_color_cwd
         set suffix '$'
     end
-
+    # hostname
+    set_color red
+    echo -n @(hostname)" "
+    set_color normal
     # PWD
     set_color $color_cwd
     echo -n (prompt_pwd)
