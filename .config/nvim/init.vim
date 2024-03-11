@@ -2,6 +2,7 @@ set number
 set expandtab
 set shiftwidth=2
 set autoindent
+set mouse=
 
 call plug#begin('~/.local/share/nvim/plugged')
 
