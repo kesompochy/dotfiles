@@ -17,7 +17,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 nnoremap nn :NvimTreeToggle<CR>
 nnoremap nf :NvimTreeFindFile<CR>
 nnoremap nfc :NvimTreeFocus<CR>:lua require'nvim-tree.api'.fs.create()<CR>
-nnoremap nfd :NvimTreeFocus<CR>:lua require'nvimtree.api'.fs.remove()<CR>
+nnoremap nfd :NvimTreeFocus<CR>:lua require'nvim-tree.api'.fs.remove()<CR>
 nnoremap nfr :NvimTreeFocus<CR>:lua require'nvim-tree.api'.fs.rename_node()<CR>
 
 " TypeScript用のシンタックスハイライトとLSPサポート
