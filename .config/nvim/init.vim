@@ -11,6 +11,7 @@ autocmd VimLeavePre * NvimTreeClose
 
 nnoremap <C-S> :w<CR>
 inoremap <C-S> <Esc>:w<CR>
+nnoremap <F3> :set number!<CR>
 
 " ファイルエクスプローラ
 Plug 'kyazdani42/nvim-tree.lua'
@@ -29,7 +30,6 @@ Plug 'tpope/vim-fugitive'
 nnoremap gg :G<CR>
 nnoremap gc :G commit<CR>
 nnoremap gd :G diff<CR>
-
 
 " telescope.nvim
 Plug 'nvim-lua/plenary.nvim'
