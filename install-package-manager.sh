@@ -13,4 +13,8 @@ echo "Installing neovim plugins..."
 
 nvim +PlugInstall +qall
 
+echo "Installing coc extensions..."
+
+nvim +CocInstall
+
 echo "Neovim setup complete!"

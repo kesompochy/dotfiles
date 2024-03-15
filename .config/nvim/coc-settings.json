@@ -1,0 +1,6 @@
+{
+  "tsserver": {
+    "experimental": true,
+    "experimentalWatchedProjects": true
+  }
+}
