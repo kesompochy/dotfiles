@@ -9,6 +9,7 @@ switch (uname)
     sudo apt install -y fzf
     sudo apt install -y fish
     sudo apt install -y golang-go
+    go install github.com/x-motemen/ghq@latest
 
   case Darwin
     brew install neovim
@@ -19,7 +20,6 @@ echo "Change default shell to fish!!"
 sudo chsh -s (which fish) $USER
 
 echo "Install common packages!!"
-go install github.com/x-motemen/ghq@latest
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
