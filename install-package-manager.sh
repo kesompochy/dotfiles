@@ -15,6 +15,6 @@ nvim +PlugInstall +qall
 
 echo "Installing coc extensions..."
 
-nvim +CocInstall
+nvim -c "CocInstall" -c "q" 
 
 echo "Neovim setup complete!"
