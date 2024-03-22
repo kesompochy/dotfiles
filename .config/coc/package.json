@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "coc-json": ">=1.9.2",
+    "coc-tsserver": ">=2.1.4",
+    "coc-html": ">=1.8.0",
+    "coc-css": ">=2.1.0",
+    "@yaegassy/coc-volar": ">=0.35.1",
+    "coc-eslint": ">=1.6.0",
+    "coc-prettier": ">=9.3.2",
+    "coc-stylelint": ">=1.2.0"
+  }
+}
