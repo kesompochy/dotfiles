@@ -20,9 +20,7 @@ echo "Change default shell to fish!!"
 sudo chsh -s (which fish) $USER
 
 echo "Install common packages!!"
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
+./install-package-manager.sh
 echo "===Finished installing packages!==="
 
 echo "===Start linking config files...==="
