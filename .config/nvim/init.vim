@@ -55,7 +55,7 @@ call plug#end()
 
 " coc.nvimの設定
 let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']
-inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm(): "\<Tab>"
+inoremap <silent><expr> <CR> pumvisible() ? coc#pum#confirm(): "\<CR>"
 
 lua << EOF
 require'plugins'
