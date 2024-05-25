@@ -61,7 +61,7 @@ lua << EOF
 require'plugins'
 require('telescope').setup{
   defaults = {
-    file_ignore_patterns = {'.git/'},
+    file_ignore_patterns = {'.git/', 'node_modules/'},
     vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--smart-case", "--column", "-uu", "-i"},
     extensions = { fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" }   },
   },
