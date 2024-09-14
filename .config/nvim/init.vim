@@ -3,6 +3,8 @@ set expandtab
 set shiftwidth=2
 set autoindent
 set mouse=
+set clipboard&
+set clipboard^=unnamedplus
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -12,6 +14,8 @@ autocmd VimLeavePre * NvimTreeClose
 nnoremap <C-S> :w<CR>:Format<CR>
 inoremap <C-S> <Esc>:w<CR>:Format<CR>
 nnoremap <F3> :set number!<CR>
+
+nnoremap <silent> <leader>m :%s/\r//g<CR> " 改行コードを削除
 
 " ファイルエクスプローラ
 Plug 'kyazdani42/nvim-tree.lua'
@@ -30,9 +34,6 @@ Plug 'junegunn/fzf.vim'
 
 " git
 Plug 'tpope/vim-fugitive'
-nnoremap gg :G<CR>
-nnoremap gc :G commit<CR>
-nnoremap gd :G diff<CR>
 
 " telescope.nvim
 Plug 'nvim-lua/plenary.nvim'
@@ -73,6 +74,14 @@ require('formatter').setup({
     javascript = {require("formatter.filetypes.javascript").biome},
     typescript = {require("formatter.filetypes.typescript").biome},
     vue = {require("formatter.filetypes.vue").biome},
+  },
+})
+require('nvim-tree').setup({
+  filters = {
+    git_ignored = false,
+    custom = {
+      "^\\.git$",
+    },
   },
 })
 EOF
