@@ -14,3 +14,10 @@ set -x WIN_CHROME_PATH /mnt/c/'Program Files'/Google/Chrome/Application/chrome.e
 
 set -x PATH $HOME/.nodenv/bin $PATH
 nodenv init - | source
+
+set -x PATH $HOME/.tfenv/bin:$PATH
+
+# pyenv setup
+set -x PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+pyenv init - | source
