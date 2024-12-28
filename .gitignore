@@ -1,1 +1,3 @@
 **/node_modules
+.config/coc/extensions/coc-json-data/json-schema-cache/
+
