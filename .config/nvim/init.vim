@@ -36,7 +36,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 
 " telescope.nvim
-Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -51,6 +50,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " formatter
 Plug 'mhartington/formatter.nvim'
+
+" Copilot
+Plug 'nvim-lua/plenary.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -84,4 +88,6 @@ require('nvim-tree').setup({
     },
   },
 })
+require("CopilotChat").setup {
+}
 EOF
