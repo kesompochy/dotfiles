@@ -26,5 +26,8 @@ set -x PYENV_ROOT $HOME/.pyenv
 fish_add_path $PYENV_ROOT/bin
 pyenv init - | source
 
-# The next line updates PATH for the Google Cloud SDK.
+# vim like keybind
+fish_vi_key_bindings
+
+# updates PATH for the Google Cloud SDK.
 if [ -f '/home/kesompochy/google-cloud-sdk/path.fish.inc' ]; . '/home/kesompochy/google-cloud-sdk/path.fish.inc'; end
