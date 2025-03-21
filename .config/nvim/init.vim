@@ -53,8 +53,8 @@ Plug 'mhartington/formatter.nvim'
 
 " Copilot
 Plug 'nvim-lua/plenary.nvim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim'
-Plug 'github/copilot.vim'
+" Plug 'CopilotC-Nvim/CopilotChat.nvim'
+" Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -88,6 +88,4 @@ require('nvim-tree').setup({
     },
   },
 })
-require("CopilotChat").setup {
-}
 EOF
