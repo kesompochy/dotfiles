@@ -20,7 +20,60 @@ echo "Change default shell to fish!!"
 sudo chsh -s (which fish) $USER
 
 echo "Install common packages!!"
-./install-package-manager.sh
+
+# Install fisher if not installed
+if not functions -q fisher
+  echo "Installing fisher..."
+  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+  echo "Fisher installed!"
+end
+
+# Install nvm.fish and Node.js
+if not functions -q nvm
+  echo "Installing nvm.fish..."
+  fisher install jorgebucaran/nvm.fish
+  echo "nvm.fish installed!"
+end
+
+# Install Node.js LTS if not installed
+if not command -v node > /dev/null; or not nvm list | grep -q "lts"
+  echo "Installing Node.js LTS..."
+  nvm install lts
+  nvm use lts
+  echo "Node.js LTS installed!"
+else
+  echo "Node.js already installed"
+end
+
+# Install vim-plug
+if not test -f ~/.local/share/nvim/site/autoload/plug.vim
+  echo "Installing vim-plug..."
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  echo "vim-plug install complete!"
+else
+  echo "vim-plug already installed!"
+end
+
+echo "Installing neovim plugins..."
+nvim +PlugInstall +qall
+
+echo "Installing coc extensions..."
+nvim -c "CocInstall" -c "q" 
+
+echo "Neovim setup complete!"
+
+# Install Claude Code
+if not command -v claude > /dev/null
+  echo "Installing Claude Code..."
+  # Use nvm.fish's npm
+  nvm use lts
+  npm install -g @anthropic-ai/claude-code
+  echo "Claude Code installed!"
+else
+  echo "Claude Code already installed"
+end
+
 echo "===Finished installing packages!==="
 
 echo "===Start linking config files...==="
@@ -41,8 +94,33 @@ for dir in (ls $repo_config_dir)
   echo "Linked $repo_subdir to $home_subdir!!"
 end
 
-ln -s (pwd)/.tmux.conf $HOME/.tmux.conf
-ln -s (pwd)/.gitconfig $HOME/.gitconfig
+# Link tmux.conf
+if test -e $HOME/.tmux.conf
+  if not test -L $HOME/.tmux.conf
+    mv $HOME/.tmux.conf $HOME/.tmux.conf_backup_(date +%Y%m%d_%H%M%S)
+    ln -s (pwd)/.tmux.conf $HOME/.tmux.conf
+    echo "Linked .tmux.conf (backup created)"
+  else
+    echo ".tmux.conf symlink already exists"
+  end
+else
+  ln -s (pwd)/.tmux.conf $HOME/.tmux.conf
+  echo "Linked .tmux.conf"
+end
+
+# Link gitconfig
+if test -e $HOME/.gitconfig
+  if not test -L $HOME/.gitconfig
+    mv $HOME/.gitconfig $HOME/.gitconfig_backup_(date +%Y%m%d_%H%M%S)
+    ln -s (pwd)/.gitconfig $HOME/.gitconfig
+    echo "Linked .gitconfig (backup created)"
+  else
+    echo ".gitconfig symlink already exists"
+  end
+else
+  ln -s (pwd)/.gitconfig $HOME/.gitconfig
+  echo "Linked .gitconfig"
+end
 
 echo "===Finished linking config files!==="
 
