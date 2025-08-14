@@ -1,5 +1,10 @@
 # view
 
+# Use nvm.fish's Node.js by default
+if functions -q nvm
+    nvm use lts > /dev/null 2>&1
+end
+
 # path
 set -e fish_user_paths
 
