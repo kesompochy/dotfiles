@@ -53,8 +53,8 @@ Plug 'mhartington/formatter.nvim'
 
 " Copilot
 Plug 'nvim-lua/plenary.nvim'
-" Plug 'CopilotC-Nvim/CopilotChat.nvim'
-" Plug 'github/copilot.vim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -63,7 +63,6 @@ let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css'
 inoremap <silent><expr> <CR> pumvisible() ? coc#pum#confirm(): "\<CR>"
 
 lua << EOF
-require'plugins'
 require('telescope').setup{
   defaults = {
     file_ignore_patterns = {'.git/', 'node_modules/'},
