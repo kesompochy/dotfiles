@@ -130,3 +130,54 @@ source $home_config_dir/fish/config.fish
 echo "Sourcing tmux config"
 tmux source ~/.tmux.conf
 echo "===Finished sourcing config files!==="
+
+# Setup Hyper configuration for Windows (if in WSL)
+function setup_hyper_config
+  set -l windows_user $argv[1]
+  
+  # Default to current Windows user if not provided
+  if test -z "$windows_user"
+    set windows_user (cmd.exe /c echo %USERNAME% 2>/dev/null | tr -d '\r')
+  end
+  
+  # Check if Hyper is installed on Windows
+  set hyper_config_dir "/mnt/c/Users/$windows_user/AppData/Roaming/Hyper"
+  if not test -d $hyper_config_dir
+    echo "Hyper not found for user $windows_user, skipping"
+    return 0
+  end
+  
+  echo "===Setting up Hyper configuration for Windows user: $windows_user==="
+  
+  set hyper_config_path "$hyper_config_dir/.hyper.js"
+  set dotfiles_hyper_path (pwd)/windows/hyper/.hyper.js
+  
+  # Check if dotfiles hyper config exists
+  if not test -f $dotfiles_hyper_path
+    echo "No Hyper config found in dotfiles, skipping"
+    return 0
+  end
+  
+  # Backup existing config if it's not a symlink
+  if test -e $hyper_config_path
+    if not test -L $hyper_config_path
+      set backup_path "$hyper_config_path.backup_"(date +%Y%m%d_%H%M%S)
+      mv $hyper_config_path $backup_path
+      echo "Backed up existing Hyper config to $backup_path"
+    else
+      rm $hyper_config_path
+      echo "Removed existing symlink"
+    end
+  end
+  
+  # Create symlink
+  ln -s $dotfiles_hyper_path $hyper_config_path
+  echo "Linked Hyper config from dotfiles to Windows"
+  
+  return 0
+end
+
+# Run Hyper setup if in WSL
+if test -e /proc/sys/fs/binfmt_misc/WSLInterop
+  setup_hyper_config
+end
