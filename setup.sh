@@ -66,9 +66,7 @@ echo "Neovim setup complete!"
 # Install Claude Code
 if not command -v claude > /dev/null
   echo "Installing Claude Code..."
-  # Use nvm.fish's npm
-  nvm use lts
-  npm install -g @anthropic-ai/claude-code
+  curl -fsSL https://claude.ai/install.sh | bash
   echo "Claude Code installed!"
 else
   echo "Claude Code already installed"
