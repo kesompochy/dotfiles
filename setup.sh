@@ -156,21 +156,32 @@ function setup_hyper_config
     return 0
   end
   
-  # Backup existing config if it's not a symlink
-  if test -e $hyper_config_path
-    if not test -L $hyper_config_path
-      set backup_path "$hyper_config_path.backup_"(date +%Y%m%d_%H%M%S)
-      mv $hyper_config_path $backup_path
-      echo "Backed up existing Hyper config to $backup_path"
+  # Check if symlink already points to the correct location
+  if test -L $hyper_config_path
+    # Check if the existing symlink points to our dotfiles
+    set existing_target (readlink -f $hyper_config_path 2>/dev/null)
+    if test "$existing_target" = "$dotfiles_hyper_path"
+      echo "Hyper symlink already correctly configured"
+      return 0
     else
       rm $hyper_config_path
-      echo "Removed existing symlink"
+      echo "Removed incorrect symlink"
     end
+  else if test -e $hyper_config_path
+    # Backup non-symlink file
+    set backup_path "$hyper_config_path.backup_"(date +%Y%m%d_%H%M%S)
+    mv $hyper_config_path $backup_path
+    echo "Backed up existing Hyper config to $backup_path"
   end
   
-  # Create symlink
-  ln -s $dotfiles_hyper_path $hyper_config_path
-  echo "Linked Hyper config from dotfiles to Windows"
+  # Create symlink using Windows mklink command
+  set windows_path "C:\\Users\\$windows_user\\AppData\\Roaming\\Hyper\\.hyper.js"
+  set wsl_path "\\\\wsl.localhost\\Ubuntu\\home\\kesompochy\\ghq\\github.com\\kesompochy\\dotfiles\\windows\\hyper\\.hyper.js"
+  set current_dir (pwd)
+  cd /mnt/c
+  cmd.exe /c "mklink $windows_path $wsl_path" 2>&1
+  cd $current_dir
+  echo "Created Windows symlink for Hyper config"
   
   return 0
 end
