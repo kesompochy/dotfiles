@@ -38,3 +38,13 @@ bind \cs git_switch_with_fzf
 # updates PATH for the Google Cloud SDK.
 if [ -f '/home/kesompochy/google-cloud-sdk/path.fish.inc' ]; . '/home/kesompochy/google-cloud-sdk/path.fish.inc'; end
 
+# Auto-start tmux on interactive shells
+if status is-interactive
+    and not set -q TMUX
+    and not set -q SSH_TTY
+    and not set -q SSH_CONNECTION
+    and type -q tmux
+    and test -n "$TERM"
+    and test "$TERM" != "dumb"
+    tmux attach -t default || tmux new -s default
+end
