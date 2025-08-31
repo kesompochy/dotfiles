@@ -13,5 +13,6 @@
 .config/fish/functions/nvm.fish
 .config/fish/functions/_nvm_*.fish
 
-.config/codex/
-!.config/codex/AGENTS.ms
+.config/codex/*
+!.config/codex/AGENTS.md
+!.config/codex/config.toml
