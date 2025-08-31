@@ -48,3 +48,6 @@ if status is-interactive
     and test "$TERM" != "dumb"
     tmux attach -t default || tmux new -s default
 end
+
+# codex
+set -Ux CODEX_HOME ~/.config/codex
