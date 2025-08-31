@@ -60,6 +60,18 @@ call plug#end()
 let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']
 inoremap <silent><expr> <CR> pumvisible() ? coc#pum#confirm(): "\<CR>"
 
+" autoread external changes
+set autoread
+augroup AutoRead
+  autocmd!
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() !=# 'c' | checktime | endif
+augroup END
+
+" auto checktime timer
+if has('timers')
+  call timer_start(3000, {-> execute('checktime')}, {'repeat': -1})
+endif
+
 lua << EOF
 require('telescope').setup{
   defaults = {
