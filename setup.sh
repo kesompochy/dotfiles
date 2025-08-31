@@ -72,6 +72,19 @@ else
   echo "Claude Code already installed"
 end
 
+# Install zenhan.exe for WSL IME control
+if test -n "$WSL_DISTRO_NAME"
+  if not test -f ~/.local/bin/zenhan.exe
+    echo "Installing zenhan.exe for IME control..."
+    mkdir -p ~/.local/bin
+    curl -L https://github.com/kyoh86/zenhan/releases/download/v0.0.1/zenhan.exe -o ~/.local/bin/zenhan.exe
+    chmod +x ~/.local/bin/zenhan.exe
+    echo "zenhan.exe installed!"
+  else
+    echo "zenhan.exe already installed"
+  end
+end
+
 echo "===Finished installing packages!==="
 
 echo "===Start linking config files...==="
@@ -156,37 +169,26 @@ function setup_hyper_config
     return 0
   end
   
-  # Check if symlink already points to the correct location
-  if test -L $hyper_config_path
-    # Check if the existing symlink points to our dotfiles
-    set existing_target (readlink -f $hyper_config_path 2>/dev/null)
-    if test "$existing_target" = "$dotfiles_hyper_path"
-      echo "Hyper symlink already correctly configured"
-      return 0
-    else
-      rm $hyper_config_path
-      echo "Removed incorrect symlink"
-    end
-  else if test -e $hyper_config_path
-    # Backup non-symlink file
-    set backup_path "$hyper_config_path.backup_"(date +%Y%m%d_%H%M%S)
-    mv $hyper_config_path $backup_path
-    echo "Backed up existing Hyper config to $backup_path"
-  end
-  
   # Create symlink using Windows mklink command
   set windows_path "C:\\Users\\$windows_user\\AppData\\Roaming\\Hyper\\.hyper.js"
   set wsl_path "\\\\wsl.localhost\\Ubuntu\\home\\kesompochy\\ghq\\github.com\\kesompochy\\dotfiles\\windows\\hyper\\.hyper.js"
   set current_dir (pwd)
   cd /mnt/c
-  cmd.exe /c "mklink $windows_path $wsl_path" 2>&1
+  set mklink_result (cmd.exe /c "mklink $windows_path $wsl_path" 2>&1)
+  set mklink_status $status
   cd $current_dir
-  echo "Created Windows symlink for Hyper config"
+  
+  if test $mklink_status -eq 0
+    echo "Created Windows symlink for Hyper config"
+  else
+    # mklink failed - show reason but continue
+    echo "Skipping Hyper symlink: $mklink_result"
+  end
   
   return 0
 end
 
 # Run Hyper setup if in WSL
-if test -e /proc/sys/fs/binfmt_misc/WSLInterop
+if test -n "$WSL_DISTRO_NAME"
   setup_hyper_config
 end

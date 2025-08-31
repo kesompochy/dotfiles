@@ -56,6 +56,12 @@ Plug 'github/copilot.vim'
 
 call plug#end()
 
+" WSL環境でのIME自動切り替え設定
+if !empty($WSL_DISTRO_NAME)
+  autocmd InsertLeave * silent! !zenhan.exe 0
+  autocmd CmdlineLeave * silent! !zenhan.exe 0
+endif
+
 " coc.nvimの設定
 let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']
 inoremap <silent><expr> <CR> pumvisible() ? coc#pum#confirm(): "\<CR>"
