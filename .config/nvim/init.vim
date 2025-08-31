@@ -11,8 +11,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 autocmd VimEnter * NvimTreeOpen
 autocmd VimLeavePre * NvimTreeClose
 
-nnoremap <C-S> :w<CR>:Format<CR>
-inoremap <C-S> <Esc>:w<CR>:Format<CR>
 nnoremap <F3> :set number!<CR>
 
 nnoremap <silent> <leader>m :%s/\r//g<CR> " 改行コードを削除 leaderのデフォルト値はバックスラッシュ\
