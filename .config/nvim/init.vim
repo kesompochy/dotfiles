@@ -77,6 +77,13 @@ require('formatter').setup({
     vue = {require("formatter.filetypes.vue").biome},
   },
 })
+-- format on save
+local grp = vim.api.nvim_create_augroup('FormatOnSave', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = grp,
+  pattern = '*',
+  command = 'silent! Format',
+})
 require('nvim-tree').setup({
   filters = {
     git_ignored = false,
