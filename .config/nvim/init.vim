@@ -58,10 +58,11 @@ call plug#end()
 
 " WSL環境でのIME自動切り替え設定
 if !empty($WSL_DISTRO_NAME)
-  autocmd InsertLeave * silent! !~/.local/bin/zenhan.exe 0
-  autocmd CmdlineLeave * silent! !~/.local/bin/zenhan.exe 0
+  let g:zenhan_path = expand('~/.local/bin/zenhan.exe')
+  autocmd InsertLeave * call jobstart([g:zenhan_path, '0'])
+  autocmd CmdlineLeave * call jobstart([g:zenhan_path, '0'])
   " NormalモードでEscを押した時も半角に切り替え
-  nnoremap <silent> <Esc> <Esc>:silent! !~/.local/bin/zenhan.exe 0<CR>
+  nnoremap <silent> <Esc> <Esc>:call jobstart([g:zenhan_path, '0'])<CR>
 endif
 
 " coc.nvimの設定
