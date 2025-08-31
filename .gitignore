@@ -12,3 +12,6 @@
 .config/fish/functions/fisher.fish
 .config/fish/functions/nvm.fish
 .config/fish/functions/_nvm_*.fish
+
+.config/codex/
+!.config/codex/AGENTS.ms
