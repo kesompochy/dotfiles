@@ -51,3 +51,7 @@ end
 
 # codex
 set -Ux CODEX_HOME ~/.config/codex
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
