@@ -2,9 +2,13 @@ set number
 set expandtab
 set shiftwidth=2
 set autoindent
-set mouse=
+set mouse=a
 set clipboard&
 set clipboard^=unnamedplus
+if has('termguicolors')
+  set termguicolors
+endif
+syntax on
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -25,6 +29,12 @@ nnoremap <A-k> :vertical resize -5<CR>
 " TypeScript用のシンタックスハイライトとLSPサポート
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" treesitter（高精度シンタックスハイライト）
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" colorscheme (Tree-sitter対応)
+Plug 'folke/tokyonight.nvim'
 
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -55,6 +65,20 @@ Plug 'CopilotC-Nvim/CopilotChat.nvim'
 Plug 'github/copilot.vim'
 
 call plug#end()
+
+" 配色読込（未導入でもエラー抑止）
+silent! colorscheme tokyonight
+
+" Tree-sitter → colorscheme連動のリンク補強
+augroup TreesitterHighlightLinks
+  autocmd!
+  autocmd ColorScheme * highlight! link @keyword Keyword
+  autocmd ColorScheme * highlight! link @conditional Conditional
+  autocmd ColorScheme * highlight! link @repeat Repeat
+  autocmd ColorScheme * highlight! link @constant Constant
+  autocmd ColorScheme * highlight! link @type.builtin Type
+  autocmd ColorScheme * highlight! link @keyword.operator Operator
+augroup END
 
 " WSL環境でのIME自動切り替え設定
 if !empty($WSL_DISTRO_NAME)
@@ -113,4 +137,14 @@ require('nvim-tree').setup({
     },
   },
 })
+EOF
+
+lua << EOF
+local ok, ts = pcall(require, 'nvim-treesitter.configs')
+if ok then
+  ts.setup({
+    ensure_installed = { 'typescript', 'tsx', 'javascript', 'json', 'vim', 'lua' },
+    highlight = { enable = true, additional_vim_regex_highlighting = false },
+  })
+end
 EOF
