@@ -7,6 +7,7 @@ switch (uname)
     sudo apt update
     # sudo apt install neovim # This is not the latest version
     sudo apt install -y fzf
+    sudo apt install -y ripgrep
     sudo apt install -y fish
     sudo apt install -y golang-go
     go install github.com/x-motemen/ghq@latest
@@ -14,6 +15,7 @@ switch (uname)
   case Darwin
     brew install neovim
     brew install fzf
+    brew install ripgrep
 end
 
 echo "Change default shell to fish!!"
