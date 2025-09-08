@@ -5,3 +5,7 @@
         name = kesompochy
 [hub]
         protocol = ssh
+[core]
+	editor = vim
+[sequence]
+	editor = vim
