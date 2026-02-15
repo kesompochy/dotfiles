@@ -1,0 +1,10 @@
+keybinds {
+    unbind "Ctrl g"
+    normal {
+        bind "Ctrl a" { SwitchToMode "locked"; }
+    }
+    locked {
+        bind "Ctrl a" { SwitchToMode "normal"; }
+    }
+}
+copy_command "clip.exe"
